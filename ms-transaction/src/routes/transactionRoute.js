@@ -4,6 +4,7 @@ import transactionController from '../controllers/transactionController.js';
 const router = express.Router();
 
 router
-  .get('/transaction/:id', transactionController.getById);
+  .get('/transaction/:id', transactionController.getById)
+  .post('/transaction/', transactionController.create);
 
 export default router;
