@@ -18,6 +18,19 @@ class CustomerController {
       res.status(500).send({ message: err.message });
     }
   };
+
+  static validateCreditCard = async (req, res) => {
+    const cardData = req.body;
+
+    try {
+      const customerId = await Customer.findOne({ cardData }, { _id: 1 });
+
+      if (!customerId) return res.status(400).send('Credentials don\'t match');
+      return res.status(200).send(customerId);
+    } catch (err) {
+      return res.status(500).send({ message: err.message });
+    }
+  };
 }
 
 export default CustomerController;
