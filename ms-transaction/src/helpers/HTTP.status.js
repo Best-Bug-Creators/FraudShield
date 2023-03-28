@@ -7,6 +7,7 @@ const HTTPStatus = {
   NOT_FOUND: 404,
   UN_ENTITY: 422,
   INTERNAL: 500,
+  SEE_OTHER: 303,
 };
 
 export default HTTPStatus;
