@@ -1,0 +1,95 @@
+openapi: 3.0.3
+info:
+  title: FraudShield Customer API
+  description: |-
+    This is an API created for the **FraudShield** project.
+    The Project is a Microservices Architecture responsible for detecting payment fraud.
+    
+    This API is responsible for requests made to **FraudShield** clients.
+  version: 0.0.1
+  contact: 
+    name: Nome aleatorio
+    email: email@aleatorio.com
+    url: urlaleatoria.com
+  license:
+    name: Licença Pública
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+paths:
+  /customers/validateCard:
+    get:
+      summary: Validates that the card data agrees with the data found in database.
+      responses:
+        200:
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  customerId:
+                    type: string
+                    format: uuid
+        404:
+          $ref: "#/components/responses/NotFound"
+          
+  /customers/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get: 
+      summary: Retrieve a customer by ID.
+      responses:
+        200:
+          description: Success.
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Customer"
+        404:
+          $ref: "#/components/responses/NotFound"
+
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        customerId:
+          type: string
+          format: uuid
+        personalData:
+          type: object
+          properties:
+            name:
+              type: string
+            cpf:
+              type: string
+            email:
+              type: string
+            phone:
+              type: string
+            monthlyIncome:
+              type: number
+        adress:
+          type: object
+          properties:
+            publicPlace:
+              type: string
+            number:
+              type: string
+            additionalInfos:
+              type: string
+            zipCode:
+              type: string
+            city:
+              type: string
+            state:
+              type: string
+  responses:
+    NotFound:
+      description: "Não encontrado."
+      content:
+        application/json:
+          example: "Not Found"
