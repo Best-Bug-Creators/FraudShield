@@ -7,7 +7,7 @@ class CustomerController {
     try {
       const customer = await Customer.findById(id);
       if (!customer) {
-        res.status(404).send({ message: 'Customer not found. ' });
+        res.status(404).send({ message: 'Customer not found.' });
       } else {
         res.status(200).send({
           personalData: customer.personalData,
