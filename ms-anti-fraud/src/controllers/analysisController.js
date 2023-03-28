@@ -16,6 +16,16 @@ class analysisController {
     });
   };
 
+  static findAnalysisUnderReview = (_req, res) => {
+    Analysis.find({ status: 'Under review' }, (err, analysis) => {
+      if (err) {
+        res.status(404).send({ message: err.message });
+      } else {
+        res.status(200).json(analysis);
+      }
+    });
+  };
+
   static createAnalysis = (req, res) => {
     const infoAnalysis = { ...req.body, status: 'Under review' };
     const analysis = new Analysis(infoAnalysis);

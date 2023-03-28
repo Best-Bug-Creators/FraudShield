@@ -6,6 +6,7 @@ const router = express.Router();
 router
   .get('/analysis', analysisController.findAllAnalysis)
   .get('/analysis/:id', analysisController.findAnalysisById)
+  .get('/analysis/under-review', analysisController.findAnalysisUnderReview)
   .post('/analysis', analysisController.createAnalysis)
   .put('/analysis/:id', analysisController.updateAnalysis)
   .delete('/analysis/:id', analysisController.deleteAnalysis);
