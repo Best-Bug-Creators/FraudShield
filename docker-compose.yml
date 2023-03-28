@@ -9,6 +9,9 @@ services:
       - ./ms-transaction/:/app/ms-transaction
     environment:
       - PORT=3003
+      - DB_HOST=mongodb
+      - DB_PORT=27017
+      - DB_DATABASE=FraudShield-transactions
     depends_on:
       - mongodb
 

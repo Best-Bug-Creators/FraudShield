@@ -9,4 +9,4 @@ const HTTPStatus = {
   INTERNAL: 500,
 };
 
-module.exports = HTTPStatus;
+export default HTTPStatus;
