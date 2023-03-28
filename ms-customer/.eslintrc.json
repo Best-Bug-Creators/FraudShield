@@ -11,6 +11,7 @@
         "ecmaVersion": "latest"
     },
     "rules": {
-        "import/extensions": 0
+      "linebreak-style": ["error", "windows"],
+      "import/extensions": ["error", "ignorePackages"]
     }
 }

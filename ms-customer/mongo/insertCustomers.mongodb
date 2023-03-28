@@ -1,0 +1,122 @@
+use('fraudshield-customers')
+
+db.createCollection('customers')
+
+db.customers.insertMany([
+  {
+    personalData: {
+      name: 'Lucas Marcos Nogueira',
+      cpf: '67982223230',
+      email: 'lucas.marcos.nogueira@br.atlascopco.com',
+      phone: '85981934991',
+      monthlyIncome: 5000,
+    },
+    address: {
+      publicPlace: 'Rua Três de Junho',
+      number: '378',
+      aditionalInfos: 'S/N',
+      zipCode: '60863059',
+      city: 'Fortaleza',
+      state: 'CE'
+    },
+    cardData: {
+      name: 'Lucas Nogueira',
+      number: '5528818147125386',
+      expirationDate: '2024-09',
+      cvv: '443',
+      invoiceExpirationDate: '25'
+    }
+  }, {
+    personalData: {
+      name: 'Arthur Noah Lorenzo Baptista',
+      cpf: '66858216049',
+      email: 'arthur_noah_baptista@piemme.com.br',
+      phone: '91988665254',
+      monthlyIncome: 5000,
+    },
+    address: {
+      publicPlace: 'Travessa Estado do Pará',
+      number: '442',
+      aditionalInfos: 'S/N',
+      zipCode: '68625020',
+      city: 'Paragominas',
+      state: 'PA'
+    },
+    cardData: {
+      name: 'Arthur Baptista',
+      number: '4916661471729941',
+      expirationDate: '2024-02',
+      cvv: '541',
+      invoiceExpirationDate: '25'
+    }
+  }, {
+    personalData: {
+      name: 'Juan Guilherme Pinto',
+      cpf: '32698577487',
+      email: 'juan.guilherme.pinto@ozzape.com',
+      phone: '92995475445',
+      monthlyIncome: 5000,
+    },
+    address: {
+      publicPlace: 'Travessa Jateí',
+      number: '825',
+      aditionalInfos: 'S/N',
+      zipCode: '69098104',
+      city: 'Manaus',
+      state: 'AM'
+    },
+    cardData: {
+      name: 'Juan Pinto',
+      number: '4929791713238248',
+      expirationDate: '2024-12',
+      cvv: '755',
+      invoiceExpirationDate: '25'
+    }
+  }, {
+    personalData: {
+      name: 'Thiago Mário Mendes',
+      cpf: '47486242729',
+      email: 'thiagomariomendes@viavaleseguros.com.br',
+      phone: '45982277445',
+      monthlyIncome: 5000,
+    },
+    address: {
+      publicPlace: 'Rua Caroba',
+      number: '867',
+      aditionalInfos: 'S/N',
+      zipCode: '85807800',
+      city: 'Cascavel',
+      state: 'PR'
+    },
+    cardData: {
+      name: 'Thiago Mendes',
+      number: '5352730471443072',
+      expirationDate: '2023-12',
+      cvv: '444',
+      invoiceExpirationDate: '25'
+    }
+  }, {
+    personalData: {
+      name: 'Sophia Isabelle Pires',
+      cpf: '18209001264',
+      email: 'sophia_isabelle_pires@astconsult.com.br',
+      phone: '11997736217',
+      monthlyIncome: 5000,
+    },
+    address: {
+      publicPlace: 'Praça Oseias dos Santos',
+      number: '322',
+      aditionalInfos: 'S/N',
+      zipCode: '03541130',
+      city: 'São Paulo',
+      state: 'SP'
+    },
+    cardData: {
+      name: 'Sophia Pires',
+      number: '4556876957764817',
+      expirationDate: '2025-02',
+      cvv: '427',
+      invoiceExpirationDate: '25'
+    }
+  }
+])
