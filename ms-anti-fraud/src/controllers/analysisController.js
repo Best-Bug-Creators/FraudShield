@@ -1,5 +1,4 @@
 import Analysis from '../models/Analysis.js';
-
 class analysisController {
   static findAllAnalysis = (_req, res) => {
     Analysis.find((_err, allAnalysis) => res.status(200).json(allAnalysis));
@@ -40,7 +39,8 @@ class analysisController {
 
   static updateAnalysis = (req, res) => {
     const { id } = req.params;
-    Analysis.findByIdAndUpdate(id, { $set: req.body }, { new: true }, (err, analysis) => {
+    const { status } = req.body;
+    Analysis.findByIdAndUpdate(id, { $set: status }, { new: true }, (err, analysis) => {
       if (err) {
         res.status(400).send({ message: err.message });
       } else {
