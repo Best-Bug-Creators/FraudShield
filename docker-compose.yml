@@ -11,6 +11,29 @@ services:
       - PORT=3003
     depends_on:
       - mongodb
+
+  ms-anti-fraud:
+    container_name: 'ms-anti-fraud'
+    build: ./ms-anti-fraud/
+    ports:
+      - 3001:3001
+    volumes:
+      - ./ms-anti-fraud/:/app/ms-anti-fraud
+    environment:
+      - PORT=3001
+    depends_on:
+      - mongodb-anti-fraud
+
+  mongodb-anti-fraud:
+    image: mongo:5
+    ports:
+      - 27018:27018
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+    volumes:
+      - mongo-anti-fraud-volume:/data/db
+
   mongodb:
     image: mongo:5
     ports:
@@ -22,3 +45,4 @@ services:
       - mongo-fraudshield-volume:/data/db
 volumes:
   mongo-fraudshield-volume:
+  mongo-anti-fraud-volume:
