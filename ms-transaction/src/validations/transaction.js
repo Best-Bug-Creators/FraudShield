@@ -1,6 +1,6 @@
 import JOI from "joi";
-import customError from "../helpers/CustomError";
-import HTTPStatus from "../helpers/HTTP.status";
+import customError from "../helpers/CustomError.js";
+import HTTPStatus from "../helpers/HTTP.status.js";
 
 const createValidation = (payload) => {
     const {error} = JOI.object({
@@ -14,4 +14,15 @@ const createValidation = (payload) => {
     if (error) throw customError(HTTPStatus.UN_ENTITY, error.message);
 }
 
-export default createValidation;
+const updateStatusValidation = (payload) =>{
+    const {error} = JOI.object({
+        status: JOI.string().valid('Approved', 'Analysis', 'Rejected').required(),
+    }).validate(payload);
+
+    if (error) throw customError(HTTPStatus.UN_ENTITY, error.message);
+}
+
+export default {
+    createValidation,
+    updateStatusValidation,
+};

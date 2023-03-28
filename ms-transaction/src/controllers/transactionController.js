@@ -20,7 +20,15 @@ export const create = async (req, res) => {
     .json(response);
 }
 
+const updateStatus = async (req, res) => {
+  const { id } = req.params;
+  const payload = req.body;
+  const response = await TransactionService.updateStatus(id, payload);
+  return res.status(HTTPStatus.OK).json(response);
+}
+
 export default {
   getById,
   create,
+  updateStatus,
 }

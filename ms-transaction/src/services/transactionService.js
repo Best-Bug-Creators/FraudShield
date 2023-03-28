@@ -1,6 +1,6 @@
 import Transaction from "../models/Transaction.js";
-import createValidation from "../validations/transaction.js"
-import axios from axios;
+import validate from "../validations/transaction.js"
+import axios from "axios";
 
 const getById = async (id) => {
   const response = await Transaction.findById(id);
@@ -8,7 +8,7 @@ const getById = async (id) => {
 };
 
 const create = async (payload, clientId) => {
-  createValidation(payload);
+  validate.createValidation(payload);
   const client = await axios.get(`localhost:3002/customer/${clientId}`);
   const transactionInstance = {
     value: payload.value,
@@ -44,7 +44,16 @@ const create = async (payload, clientId) => {
   }
 }; 
 
+const updateStatus = async (id, payload) => {
+  validate.updateStatusValidation(payload)
+  const transaction = await Transaction.findById(id);
+  transaction.status = payload.status
+  const response = await Transaction.findByIdAndUpdate(id, transaction, {new: true});
+  return response
+};
+
 export default {
   getById,
   create,
+  updateStatus,
 };
