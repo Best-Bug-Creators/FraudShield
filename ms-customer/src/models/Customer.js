@@ -7,7 +7,7 @@ const customerSchema = new mongoose.Schema({
     cpf: { type: String, required: true },
     email: { type: String, required: true },
     phone: { type: String, required: true },
-    monthlyIncome: { type: Number, required: true },
+    monthlyIncome: { type: mongoose.Types.Decimal128, required: true },
   },
   address: {
     publicPlace: { type: String, required: true },
@@ -26,6 +26,6 @@ const customerSchema = new mongoose.Schema({
   },
 }, { versionKey: false });
 
-const customer = mongoose.model('customers', customerSchema);
+const CUSTOMER = mongoose.model('customers', customerSchema);
 
-export default customer;
+export default CUSTOMER;

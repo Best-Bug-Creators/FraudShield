@@ -22,7 +22,7 @@ db.customers.insertMany([
     cardData: {
       name: 'Lucas Nogueira',
       number: '5528818147125386',
-      expirationDate: '2024-09-27',
+      expirationDate: '2024-09',
       cvv: '443',
       invoiceExpirationDate: '25'
     }
@@ -45,7 +45,7 @@ db.customers.insertMany([
     cardData: {
       name: 'Arthur Baptista',
       number: '4916661471729941',
-      expirationDate: '2024-02-27',
+      expirationDate: '2024-02',
       cvv: '541',
       invoiceExpirationDate: '25'
     }
@@ -68,7 +68,7 @@ db.customers.insertMany([
     cardData: {
       name: 'Juan Pinto',
       number: '4929791713238248',
-      expirationDate: '2024-12-27',
+      expirationDate: '2024-12',
       cvv: '755',
       invoiceExpirationDate: '25'
     }
@@ -91,7 +91,7 @@ db.customers.insertMany([
     cardData: {
       name: 'Thiago Mendes',
       number: '5352730471443072',
-      expirationDate: '2023-12-27',
+      expirationDate: '2023-12',
       cvv: '444',
       invoiceExpirationDate: '25'
     }
@@ -114,7 +114,7 @@ db.customers.insertMany([
     cardData: {
       name: 'Sophia Pires',
       number: '4556876957764817',
-      expirationDate: '2025-02-27',
+      expirationDate: '2025-02',
       cvv: '427',
       invoiceExpirationDate: '25'
     }
