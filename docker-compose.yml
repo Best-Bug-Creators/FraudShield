@@ -11,6 +11,15 @@ services:
       - PORT=3003
     depends_on:
       - mongodb
+  ms-customer:
+    container_name: ms-customer
+    build: ./ms-customer
+    ports:
+      - 3002:3002
+    volumes:
+      - ./ms-customer/:/app/ms-customer
+    depends_on:
+      - mongodb
   mongodb:
     image: mongo:5
     ports:
