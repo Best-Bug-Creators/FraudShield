@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 mongoose.set('strictQuery', true);
 
-mongoose.connect('mongodb://admin:secret@mongodb:27017/FraudShield-anti-fraud?authSource=admin');
+mongoose.connect('mongodb://root:secret@mongodb-anti-fraud:27017/ms-anti-fraud?authSource=admin');
 
 const db = mongoose.connection;
 
