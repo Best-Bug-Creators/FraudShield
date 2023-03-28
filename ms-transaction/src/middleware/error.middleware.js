@@ -1,4 +1,4 @@
-import HTTPStatus from "../helpers/HTTP.status";
+import HTTPStatus from "../helpers/HTTP.status.js";
 
 export default function errorMiddleware(err, req, res, next) {
   if (!err.status) return res.status(HTTPStatus.INTERNAL).json(err.message);

@@ -1,6 +1,10 @@
-import Transaction from "../models/Transaction";
+import Transaction from "../models/Transaction.js";
 
-export const getById = async (id) => {
+const getById = async (id) => {
   const response = await Transaction.findById(id);
   return response;
+};
+
+export default {
+  getById,
 };
