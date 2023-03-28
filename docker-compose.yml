@@ -25,7 +25,7 @@ services:
   mongodb-anti-fraud:
     image: mongo:5
     ports:
-      - 27018:27018
+      - 27017:27018
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=secret
