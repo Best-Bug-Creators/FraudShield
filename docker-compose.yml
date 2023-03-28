@@ -9,8 +9,11 @@ services:
       - ./ms-transaction/:/app/ms-transaction
     environment:
       - PORT=3003
+      - DB_HOST=mongodb-transaction
+      - DB_PORT=27017
+      - DB_DATABASE=FraudShield-transactions
     depends_on:
-      - mongodb
+      - mongodb-transaction
 
   ms-customer:
     container_name: ms-customer
@@ -44,7 +47,7 @@ services:
     volumes:
       - mongo-anti-fraud-volume:/data/db
 
-  mongodb:
+  mongodb-transaction:
     image: mongo:5
     ports:
       - 27017:27017

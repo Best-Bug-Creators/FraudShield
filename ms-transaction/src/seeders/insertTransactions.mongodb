@@ -1,0 +1,11 @@
+use('FraudShield-transactions');
+db.transactions.insertMany([
+  {
+    value: 4500.99,
+    clientId: '537eed02ed345b2e039652d2',
+    status: 'Analysis'
+  }
+]);
+
+use('FraudShield-transactions');
+db.transactions.find();

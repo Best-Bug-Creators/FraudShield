@@ -1,8 +1,8 @@
 import 'express-async-errors';
 import express from 'express';
-import db from './config/dbConnect.js';
+import db from './config/dbConfig.js';
 import routes from './routes/index.js';
-import errorMiddleware from './middleware/error.middleware';
+import errorMiddleware from './middleware/error.middleware.js';
 
 db.on('error', console.log.bind(console, 'Connection error'));
 
