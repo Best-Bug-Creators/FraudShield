@@ -7,9 +7,9 @@ const getById = async (id) => {
   return response;
 };
 
-const create = async (payload, clientId) => {
+const create = async (payload) => {
   validate.createValidation(payload);
-  const client = await axios.get(`localhost:3002/customer/${clientId}`);
+  const client = await axios.get(`localhost:3002/customer/${payload.clientId}`);
   const transactionInstance = {
     value: payload.value,
     clientId: client._id,

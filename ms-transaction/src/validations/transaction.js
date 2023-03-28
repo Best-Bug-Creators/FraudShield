@@ -4,6 +4,7 @@ import HTTPStatus from "../helpers/HTTP.status.js";
 
 const createValidation = (payload) => {
     const {error} = JOI.object({
+        clientId: JOI.string().required(),
         cardNumber: JOI.string().min(16).max(16).required(),
         value: JOI.number().required(),
         owner: JOI.string().required(),

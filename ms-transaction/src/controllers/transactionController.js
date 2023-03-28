@@ -10,8 +10,7 @@ const getById = async (req, res) => {
 
 export const create = async (req, res) => {
   const payload = req.body
-  const { id } = req.params;
-  const response = await TransactionService.create(payload, id);
+  const response = await TransactionService.create(payload);
 
   if (response.status === "Approved") return res.status(HTTPStatus.CREATED).json(response);
   if (response.status === "Analysis") return res
