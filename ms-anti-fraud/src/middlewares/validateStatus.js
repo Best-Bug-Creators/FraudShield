@@ -2,7 +2,7 @@ import Analysis from '../models/Analysis.js';
 
 const availableStatus = ['Approved', 'Rejected'];
 
-export default statusValidation = async (req, res, next) => {
+const statusValidation = async (req, res, next) => {
     const { id } = req.params;
     const { status } = req.body;
     try {
@@ -22,3 +22,5 @@ export default statusValidation = async (req, res, next) => {
         return res.status(500).json(error.message);
     }
 };
+
+export default statusValidation;
