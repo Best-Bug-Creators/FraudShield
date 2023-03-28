@@ -1,9 +1,9 @@
 import express from 'express';
-// import analysisController from '../controllers/analysisController.js';
+import transactionController from '../controllers/transactionController.js';
 
 const router = express.Router();
 
 router
-  .get('/transaction/:id');
+  .get('/transaction/:id', transactionController.getById);
 
 export default router;
