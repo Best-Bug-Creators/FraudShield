@@ -4,8 +4,8 @@ import transactionController from '../controllers/transactionController.js';
 const router = express.Router();
 
 router
-  .get('/transaction/:id', transactionController.getById)
-  .post('/transaction', transactionController.create)
-  .patch('/transaction/:id', transactionController.updateStatus);
+  .get('/transactions/:id', transactionController.getById)
+  .post('/transactions', transactionController.create)
+  .patch('/transactions/:id', transactionController.updateStatus);
 
 export default router;
