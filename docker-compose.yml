@@ -16,15 +16,19 @@ services:
       - mongodb-transaction
 
   ms-customer:
-    container_name: ms-customer
+    container_name: 'ms-customer'
     build: ./ms-customer
     ports:
       - 3002:3002
     volumes:
       - ./ms-customer/:/app/ms-customer
+    environment:
+      - PORT=3002
+      - DB_HOST=mongodb-customer
+      - DB_PORT=27017
+      - DB_DATABASE=fraudshield-customers
     depends_on:
       - mongodb-customer
-
 
   ms-anti-fraud:
     container_name: 'ms-anti-fraud'
@@ -39,7 +43,7 @@ services:
   mongodb-anti-fraud:
     image: mongo:5
     ports:
-      - 27017:27018
+      - 27018:27017
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=secret
@@ -65,6 +69,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=secret
     volumes:
       - mongo-customer-volume:/data/db
+      
 volumes:
   mongo-fraudshield-volume:
   mongo-customer-volume:

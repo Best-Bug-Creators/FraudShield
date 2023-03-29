@@ -1,9 +1,9 @@
-import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import {} from 'dotenv/config';
 
-dotenv.config();
+mongoose.set('strictQuery', true);
 
-mongoose.connect(process.env.DB_CUSTOMER);
+mongoose.connect(`mongodb://root:secret@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}?authSource=admin`);
 
 const db = mongoose.connection;
 
