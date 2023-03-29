@@ -16,8 +16,8 @@ const create = async (req, res) => {
   if (response.status === "Approved") return res.status(HTTPStatus.CREATED).json(response);
   if (response.status === "Analysis") return res
     .status(HTTPStatus.SEE_OTHER)
-    .set("Location", `transaction/${response.transactionId}`)
-    .json(response);
+    .set('Location', `http://127.0.0.1:3003/transactions/${response.transactionId}`)
+    .end();
 }
 
 const updateStatus = async (req, res) => {
