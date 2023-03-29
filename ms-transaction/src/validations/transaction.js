@@ -12,7 +12,7 @@ const createValidation = (payload) => {
         cvv: JOI.string().min(3).max(3).required(),
     }).validate(payload);
 
-    if (error) throw customError(HTTPStatus.UN_ENTITY, error.message);
+    if (error) throw customError(error.message, HTTPStatus.UN_ENTITY);
 }
 
 const updateStatusValidation = (payload) =>{
@@ -20,7 +20,7 @@ const updateStatusValidation = (payload) =>{
         status: JOI.string().valid('Approved', 'Analysis', 'Rejected').required(),
     }).validate(payload);
 
-    if (error) throw customError(HTTPStatus.UN_ENTITY, error.message);
+    if (error) throw customError(error.message, HTTPStatus.UN_ENTITY);
 }
 
 export default {

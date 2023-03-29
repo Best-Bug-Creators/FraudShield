@@ -1,4 +1,4 @@
-const customError = (status, errorMessage) => {
+const customError = (errorMessage, status) => {
     const err = new Error(errorMessage)
 
     err.status = status

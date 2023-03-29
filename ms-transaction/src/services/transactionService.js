@@ -9,7 +9,7 @@ const getById = async (id) => {
 
 const create = async (payload) => {
   validate.createValidation(payload);
-  const client = await axios.get(`localhost:3002/customer/${payload.clientId}`);
+  const client = await axios.get(`http://ms-customer:3002/customers/${payload.clientId}`);
   const transactionInstance = {
     value: payload.value,
     clientId: client._id,
@@ -29,13 +29,14 @@ const create = async (payload) => {
   } else {
     transactionInstance.status = "Analysis";
     const newTransaction = await Transaction.create(transactionInstance)
-    await axios.post("localhost:3001/analysis",
+    await axios.post("http://ms-anti-fraud:3001/analyses",
       {
         clientId: client._id,
         transactionId: newTransaction._id,
         status: newTransaction.status,
       }
     );
+  console.log("cheguei")
 
     return {
       value: newTransaction.value,
