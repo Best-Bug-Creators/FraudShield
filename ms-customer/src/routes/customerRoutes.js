@@ -5,6 +5,7 @@ const router = express.Router();
 
 router
   .post('/customers/validateCard', CustomerController.validateCreditCard)
+  .get('/customers/invoiceExp/:customerId', CustomerController.getCustomerInvoiceExpirationDate)
   .get('/customers/:id', CustomerController.getCustomerById);
 
 export default router;

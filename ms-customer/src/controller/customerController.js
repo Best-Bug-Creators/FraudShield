@@ -30,6 +30,25 @@ class CustomerController {
       return res.status(500).send({ message: err.message });
     }
   };
+
+  static getCustomerInvoiceExpirationDate = async (req, res) => {
+    const { customerId } = req.params;
+
+    try {
+      const customer = await Customer.findById(customerId);
+
+      if (!customer) return res.status(404).send({ message: 'Customer not found.' });
+      return res.status(200).send({
+        name: customer.personalData.name,
+        phone: customer.personalData.phone,
+        monthlyIncome: customer.personalData.monthlyIncome,
+        address: customer.address,
+        invoiceExpirationDate: customer.cardData.invoiceExpirationDate,
+      });
+    } catch (err) {
+      return res.status(500).send({ message: err.message });
+    }
+  };
 }
 
 export default CustomerController;
