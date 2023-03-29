@@ -1,0 +1,22 @@
+use('fraudshield-customers')
+
+db.createCollection('users')
+
+db.users.insertMany([
+  {
+    username: 'Lucas Marcos Nogueira',
+    password: `$2a$12$ebYtfVDa0azCt2ifAo4AyeRBtLJVp08CufJXFR2SPeVOAWLWiQExK`
+  }, {
+    username: 'Arthur Noah Lorenzo Baptista',
+    password: `$2a$12$IwNTVVtoJJjJoQLqlv02IOK/T1T/BCx6Qyu.eVfCXVtvN2vgx726K`
+  }, {
+    username: 'Juan Guilherme Pinto',
+    password: `$2a$12$ID.U4dcSgyo6uHIY/.SglOqf/hDs.LGmTBoYb7X/R6Wl5jJaTEDuu`
+  }, {
+    username: 'Thiago Mário Mendes',
+    password: `$2a$12$NsbOyaAz8HTuKRabdvuRbuacFrZbOHEvbsMTFeJ6oSokbBgGOwlMW`
+  }, {
+    username: 'Sophia Isabelle Pires',
+    password: `$2a$12$xORFyZbetwMKy8x8TXQNlO0X9IbNPhhm..fgdsTXQTDEtz2LTBUQ6`
+  }
+])

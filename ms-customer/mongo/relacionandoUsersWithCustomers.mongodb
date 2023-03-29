@@ -1,0 +1,11 @@
+use('fraudshield-customers')
+
+db.customers.find().forEach(function(customerDoc) {
+  const customerId = customerDoc._id;
+  const customerName = customerDoc.personalData.name;
+  
+  db.users.updateMany(
+    { username: customerName },
+    { $set: { customerId: customerId}}
+  )
+});
