@@ -4,7 +4,7 @@ import CustomerController from '../controller/customerController.js';
 const router = express.Router();
 
 router
-  .get('/customer/validateCard', CustomerController.validateCreditCard)
-  .get('/customer/:id', CustomerController.getCustomerById);
+  .get('/customers/validateCard', CustomerController.validateCreditCard)
+  .get('/customers/:id', CustomerController.getCustomerById);
 
 export default router;
