@@ -43,6 +43,7 @@ class CustomerController {
         name: customer.personalData.name,
         phone: customer.personalData.phone,
         monthlyIncome: customer.personalData.monthlyIncome,
+        address: customer.address,
         invoiceExpirationDate: customer.cardData.invoiceExpirationDate,
       });
     } catch (err) {
