@@ -8,11 +8,10 @@ info:
     This API is responsible for requests made to **FraudShield** clients.
   version: 0.0.1
   contact: 
-    name: Nome aleatorio
-    email: email@aleatorio.com
-    url: urlaleatoria.com
+    name: Best Bug Creators
+    url: https://github.com/Best-Bug-Creators
   license:
-    name: Licença Pública
+    name: Public License
     url: https://www.gnu.org/licenses/gpl-3.0.html
 paths:
   /customers/validateCard:
@@ -29,8 +28,8 @@ paths:
                   customerId:
                     type: string
                     format: uuid
-        404:
-          $ref: "#/components/responses/NotFound"
+        400:
+          $ref: "#/components/responses/BadRequest"
           
   /customers/{id}:
     parameters:
@@ -89,7 +88,12 @@ components:
               type: string
   responses:
     NotFound:
-      description: "Não encontrado."
+      description: "Not Found."
       content:
         application/json:
           example: "Not Found"
+    BadRequest:
+      description: "Bad Request."
+      content:
+        application/json:
+          example: "Bad Request"
