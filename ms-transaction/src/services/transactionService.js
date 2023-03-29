@@ -1,5 +1,5 @@
 import Transaction from "../models/Transaction.js";
-import validate from "../validations/transaction.js"
+import validate from "../validations/transaction.js";
 import axios from "axios";
 
 const getById = async (id) => {
@@ -14,7 +14,7 @@ const create = async (payload) => {
     value: payload.value,
     clientId: client._id,
   }
-  
+
   const halfMontlhyIncome = client.monthlyIncome / 2;
 
   if (halfMontlhyIncome > payload.value) {
@@ -29,12 +29,13 @@ const create = async (payload) => {
   } else {
     transactionInstance.status = "Analysis";
     const newTransaction = await Transaction.create(transactionInstance)
-    const antiFraud = await axios.post("localhost:3001/analysis",
-    { 
-      clientId: client._id,
-      transactionId: newTransaction._id,
-      status: newTransaction.status,
-    });
+    await axios.post("localhost:3001/analysis",
+      {
+        clientId: client._id,
+        transactionId: newTransaction._id,
+        status: newTransaction.status,
+      }
+    );
 
     return {
       value: newTransaction.value,
@@ -47,7 +48,9 @@ const create = async (payload) => {
 const updateStatus = async (id, payload) => {
   validate.updateStatusValidation(payload)
   const transaction = await Transaction.findById(id);
+
   transaction.status = payload.status
+
   const response = await Transaction.findByIdAndUpdate(id, transaction, {new: true});
   return response
 };
