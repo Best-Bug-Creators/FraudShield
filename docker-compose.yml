@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   ms-transaction:
-    container_name: 'ms-transtaction'
+    container_name: 'ms-transaction'
     build: ./ms-transaction/
     ports:
       - 3003:3003
@@ -25,6 +25,7 @@ services:
     depends_on:
       - mongodb-customer
 
+
   ms-anti-fraud:
     container_name: 'ms-anti-fraud'
     build: ./ms-anti-fraud/
@@ -32,15 +33,13 @@ services:
       - 3001:3001
     volumes:
       - ./ms-anti-fraud/:/app/ms-anti-fraud
-    environment:
-      - PORT=3001
     depends_on:
       - mongodb-anti-fraud
 
   mongodb-anti-fraud:
     image: mongo:5
     ports:
-      - 27018:27018
+      - 27017:27018
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=secret
