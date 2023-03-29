@@ -22,7 +22,7 @@ const customerSchema = new mongoose.Schema({
     number: { type: String, required: true },
     expirationDate: { type: Date, required: true },
     cvv: { type: String, required: true },
-    invoiceExpirationDate: { type: Date, required: true },
+    invoiceExpirationDate: { type: String, required: true },
   },
 }, { versionKey: false });
 
