@@ -1,8 +1,11 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import passport from 'passport';
 import bcrypt from 'bcryptjs';
 import { Strategy as LocalStrategy } from 'passport-local';
+import { Strategy as BearerStrategy } from 'passport-http-bearer';
+import jwt from 'jsonwebtoken';
 import Customer from '../controller/customerController.js';
+import Customers from '../models/Customer.js';
+import { SECRET } from './generateToken.js';
 
 function verifyUser(user) {
   if (!user) {
@@ -35,6 +38,25 @@ passport.use(
       done(erro);
     }
   }),
+);
+
+passport.use(
+  new BearerStrategy(
+    async (token, done) => {
+      try {
+        const payload = jwt.verify(token, SECRET);
+        const user = await Customers.findById(payload.sub);
+
+        if (!user) {
+          return done(null, false, { message: 'User not found.' });
+        }
+
+        return done(null, user, { token });
+      } catch (err) {
+        return done(err);
+      }
+    },
+  ),
 );
 
 export default passport;

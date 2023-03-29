@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import bcryptjs from 'bcryptjs';
 
 const passwords = ['123456', '987654', 'abcd123', 'A@bcp123', 'Sucodeuvaintegralsabormorango123@'];
