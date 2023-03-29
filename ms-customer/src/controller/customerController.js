@@ -1,4 +1,7 @@
+import bcrypt from 'bcryptjs';
 import Customer from '../models/Customer.js';
+import User from '../models/User.js';
+import createTokenJWT from '../authentication/generateToken.js';
 
 class CustomerController {
   static getCustomerById = async (req, res) => {
@@ -49,6 +52,23 @@ class CustomerController {
       return res.status(500).send({ message: err.message });
     }
   };
+
+  static hashPassword(password) {
+    const salt = 12;
+    return bcrypt.hash(password, salt);
+  }
+
+  static login = (req, res) => {
+    const token = createTokenJWT(req.user);
+    res.set('Authorization', token);
+    res.status(204).send();
+  };
+
+  static async findByUsername(username) {
+    const user = await User.findOne({ username });
+
+    return user;
+  }
 }
 
 export default CustomerController;
