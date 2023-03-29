@@ -4,11 +4,12 @@ import HTTPStatus from '../helpers/HTTP.status.js';
 const getById = async (req, res) => {
   const { id } = req.params;
   const response = await TransactionService.getById(id);
+  
 
   return res.status(HTTPStatus.OK).json(response);
 }
 
-export const create = async (req, res) => {
+const create = async (req, res) => {
   const payload = req.body
   const response = await TransactionService.create(payload);
 

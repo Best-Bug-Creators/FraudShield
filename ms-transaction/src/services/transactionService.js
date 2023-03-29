@@ -8,14 +8,20 @@ const getById = async (id) => {
 };
 
 const create = async (payload) => {
-  validate.createValidation(payload);
-  const client = await axios.get(`http://ms-customer:3002/customers/${payload.clientId}`);
+  const { value:_, ...payloadWithoutValue } = payload
+  console.log(payload)
+  console.log(payloadWithoutValue)
+  const validateCreditCardData = await axios.post("http://ms-customer:3002/customers/validateCard", payloadWithoutValue);
+  console.log("cheguei")
+  const resultOfCreditCardValidation = validateCreditCardData.data
+  const response = await axios.get(`http://ms-customer:3002/customers/${resultOfCreditCardValidation.clientId}`);
+  const client = response.data
   const transactionInstance = {
     value: payload.value,
     clientId: client._id,
   }
 
-  const halfMontlhyIncome = client.monthlyIncome / 2;
+  const halfMontlhyIncome = Number(client.personalData.monthlyIncome.$numberDecimal) / 2;
 
   if (halfMontlhyIncome > payload.value) {
     transactionInstance.status = "Approved";
@@ -36,7 +42,7 @@ const create = async (payload) => {
         status: newTransaction.status,
       }
     );
-  console.log("cheguei")
+  
 
     return {
       value: newTransaction.value,
