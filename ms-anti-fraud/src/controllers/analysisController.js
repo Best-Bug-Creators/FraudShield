@@ -1,4 +1,5 @@
 import axios from 'axios';
+import mongoose from 'mongoose';
 import Analysis from '../models/Analysis.js';
 
 class analysisController {
@@ -71,7 +72,10 @@ class analysisController {
         { $set: { status } },
         { new: true },
       );
-      if (!updatedAnalysis) {
+      await axios.patch(`localhost:3003/transactions/${updatedAnalysis.transactionId}`, { status });
+
+      if (!updatedAnalysis || !mongoose.isValidObjectId(id)) {
+        console.log('cheguei');
         res.status(404).send({ message: 'Analysis not found' });
       } else {
         res.status(200).json(updatedAnalysis);
