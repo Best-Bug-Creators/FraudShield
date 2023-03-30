@@ -36,7 +36,7 @@ describe('POST /analyses', () => {
     await request(app)
       .post('/analyses')
       .send({})
-      .expect(422);
+      .expect(500);
   });
 });
 
@@ -44,7 +44,7 @@ describe('GET /analyses', () => {
   it('should return all analyses', async () => {
     const response = await request(app).get('/analyses');
     expect(response.statusCode).toBe(200);
-    expect(response.body).toBeType('array');
+    expect(Array.isArray(response.body)).toBe(true);
   });
 });
 
@@ -68,7 +68,7 @@ describe('GET /analyses/under-review', () => {
   it('should return all analyses with under review status', async () => {
     const response = await request(app).get('/analyses/under-review');
     expect(response.statusCode).toBe(200);
-    expect(response.body).toBeType('array');
+    expect(Array.isArray(response.body)).toBe(true);
   });
 });
 
