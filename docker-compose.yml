@@ -49,6 +49,22 @@ services:
     depends_on:
       - mongodb-anti-fraud
 
+  api-gateway:
+    container_name: 'api-gateway'
+    build: ./api-gateway
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api-gateway/:/app/api-gateway
+    environment:
+      - API_GATEWAY_PORT=3000
+      - ANTI_FRAUD_HOST=ms-anti-fraud
+      - ANTI_FRAUD_PORT=3001
+      - CUSTOMER_HOST=ms-customer
+      - CUSTOMER_PORT=3002
+      - TRANSACTION_HOST=ms-transaction
+      - TRANSACTION_PORT=3003
+
   mongodb-anti-fraud:
     image: mongo:5
     ports:
