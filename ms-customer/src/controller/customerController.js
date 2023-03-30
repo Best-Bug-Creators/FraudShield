@@ -53,7 +53,7 @@ class CustomerController {
 
   static login = (req, res) => {
     const token = createTokenJWT(req.user);
-    res.set('Authorization', token);
+    res.set('Authorization', `Bearer ${token}`);
     res.status(204).send();
   };
 
