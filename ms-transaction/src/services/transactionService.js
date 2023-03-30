@@ -8,12 +8,16 @@ const getById = async (id) => {
   return response;
 };
 
-const create = async (payload) => {
+const create = async (payload, Authorization) => {
   const { value: _, ...payloadWithoutValue } = payload;
-  const validateCreditCardData = await axios.post('http://ms-customer:3002/customers/validateCard', payloadWithoutValue);
+  const validateCreditCardData = await axios.post('http://ms-customer:3002/customers/validateCard', payloadWithoutValue, {
+    headers: { Authorization },
+  });
 
   const resultOfCreditCardValidation = validateCreditCardData.data;
-  const response = await axios.get(`http://ms-customer:3002/customers/${resultOfCreditCardValidation._id}`);
+  const response = await axios.get(`http://ms-customer:3002/customers/${resultOfCreditCardValidation._id}`, {
+    headers: { Authorization }
+  });
 
   const client = response.data;
   const transactionInstance = {
