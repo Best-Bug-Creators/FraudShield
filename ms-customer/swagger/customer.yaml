@@ -14,8 +14,74 @@ info:
     name: Public License
     url: https://www.gnu.org/licenses/gpl-3.0.html
 paths:
-  /customers/validateCard:
+  /customers/invoiceExp/{customerId}:
+    parameters:
+    - name: customerId
+      in: path
+      schema:
+        type: string
+      required: true
     get:
+      security: 
+      - auth: []
+      summary: Returns name, phone number, monthly income, address and card expiration date for a given customer.
+      responses:
+        200:
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  phone:
+                    type: string
+                  monthlyIncome:
+                    type: number
+                  address:
+                    type: object
+                    properties:
+                      publicPlace:
+                        type: string
+                      number:
+                        type: string
+                      additionalInfos:
+                        type: string
+                      zipCode:
+                        type: string
+                      city:
+                        type: string
+                      state:
+                        type: string
+                  invoiceExpirationDate:
+                    type: string
+        404:
+          $ref: "#/components/responses/NotFound"
+  /customers/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get:
+      security: 
+      - auth: []
+      summary: Retrieve a customer by ID.
+      responses:
+        200:
+          description: Success.
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/Customer"
+        404:
+          $ref: "#/components/responses/NotFound"
+  /customers/validateCard:
+    post:
+      security: 
+      - auth: []
       summary: Validates that the card data agrees with the data found in database.
       responses:
         200:
@@ -30,26 +96,51 @@ paths:
                     format: uuid
         400:
           $ref: "#/components/responses/BadRequest"
-          
-  /customers/{id}:
-    parameters:
-    - name: id
-      in: path
-      schema:
-        type: string
-      required: true
-    get: 
-      summary: Retrieve a customer by ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                number:
+                  type: string
+                expirationDate:
+                  type: string
+                CVV:
+                  type: string
+                InvoiceExpirationDate:
+                  type: string
+              required:
+                - name
+                - number
+                - expirationDate
+                - CVV
+                - InvoiceExpirationDate
+  /customers/login:
+    post:
+      security: 
+      - auth: []
+      summary: Checks if the user is valid and generates a JWT token for authentication in other routes.
       responses:
-        200:
-          description: Success.
-          content:
-            application/json:
-              schema: 
-                $ref: "#/components/schemas/Customer"
-        404:
-          $ref: "#/components/responses/NotFound"
-
+        204:
+          $ref: "#/components/responses/NoContent"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - password
 components:
   schemas:
     Customer:
@@ -71,7 +162,7 @@ components:
               type: string
             monthlyIncome:
               type: number
-        adress:
+        address:
           type: object
           properties:
             publicPlace:
@@ -97,3 +188,13 @@ components:
       content:
         application/json:
           example: "Bad Request"
+    NoContent:
+      description: "No Content."
+      content:
+        application/json:
+          example: "No Content."
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
