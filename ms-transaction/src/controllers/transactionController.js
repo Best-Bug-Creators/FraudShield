@@ -10,7 +10,8 @@ const getById = async (req, res) => {
 
 const create = async (req, res) => {
   const payload = req.body;
-  const response = await TransactionService.create(payload);
+  const { authorization } = req.headers;
+  const response = await TransactionService.create(payload, authorization);
 
   if (response.status === 'Approved') return res.status(HTTPStatus.CREATED).json(response);
   return res

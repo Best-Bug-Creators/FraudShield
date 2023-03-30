@@ -6,12 +6,14 @@ import db from './config/dbConfig.js';
 import routes from './routes/index.js';
 import errorMiddleware from './middleware/error.middleware.js';
 import swaggerDocument from '../swagger/transaction-swagger.json' assert { type: 'json' };
+import passport from './authentication/authStrategies.js';
 
 db.on('error', console.log.bind(console, 'Connection error'));
 db.once('open', () => console.log('Database connection was successful'));
 
 const app = express();
 app.use(express.json());
+app.use(passport.initialize());
 
 routes(app);
 app.use(errorMiddleware);
