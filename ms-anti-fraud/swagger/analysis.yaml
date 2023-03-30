@@ -1,0 +1,192 @@
+openapi: 3.0.3
+info:
+  title: FraudShield Anti-Fraud API
+  description: |-
+    This is an API created for the **FraudShield** project.
+    The project is a Microservices Architecture responsible for detecting payment fraud.
+    
+    This API is responsible for requests made to **FraudShield** anti-fraud.
+  version: 0.0.1
+  contact: 
+    name: Best Bug Creators
+    url: https://github.com/Best-Bug-Creators
+  license:
+    name: Public License
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+paths:
+  /analyses:
+    get:
+      tags:
+        - get
+      summary: Finds all analyses
+      description: Returns all the analyses in the database.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analysis'
+        '500':
+          description: Internal Server Error
+    post:
+      tags:
+        - post
+      summary: Creates analyses
+      description: Creates and saves a new analysis in the database.
+      responses:
+        '201':
+          description: Analysis created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analysis'
+        '500':
+          description: Internal Server Error
+          
+  /analyses/under-review:
+    get:
+      tags:
+        - get
+      summary: Finds analyses with 'status' is 'under-review'
+      description: Returns all the analyses where the 'status' is 'under-review' in the database.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analysis'
+        '500':
+          description: Internal Server Error
+          
+  /analyses/{id}:
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: string
+      required: true
+    get:
+      tags:
+        - get
+      summary: Finds an analysis by ID
+      description: Details the analysis from the specified ID.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetailedAnalysis'
+        '500':
+          description: Internal Server Error
+    patch:
+      tags:
+        - patch
+      summary: Approve or reject analysis
+      description: Updates the status of analysis and saves it in the database.
+      responses:
+        '200':
+          description: Status of the analysis updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analysis'
+        '404':
+          description: Analysis not found
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - delete
+      summary: Delete an analysis
+      description: Delete an analysis from the database.
+      responses:
+        '204':
+          description: Analysis deleted successfully
+        '404':
+          description: Analysis not found
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        publicPlace:
+          type: string
+          example: '437 Lytton'
+        number:
+          type: string
+          example: '12'
+        additionalInfos:
+          type: string
+          example: 'Next to corner'
+        zipCode:
+          type: string
+          example: '123456-123'
+        city:
+          type: string
+          example: 'São Luis'
+        state:
+          type: string
+          example: 'MA'    
+    Analysis:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        clientId:
+          type: string
+          format: uuid
+        transactionId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          example: under review
+    Client:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 'John Doe'
+        phone:
+          type: string
+          example: '(12) 1234 1234'
+        Address:
+          type: object
+          items:
+            $ref: '#/components/schemas/Address'
+        monthlyIncome:
+          type: number
+          example: '123.45'
+        invoiceExpirationDate:
+          type: string
+          example: '25'
+    DetailedAnalysis:
+      type: object
+      properties:
+        analysisId:
+          type: string
+          format: uuid
+        analysisStatus:
+          type: string
+          example: under review
+        clientId:
+          type: string
+          format: uuid
+        clientData:
+          type: object
+          items:
+            $ref: '#/components/schemas/Client'
+        transactionId:
+          type: string
+          format: uuid
+        transactionAmount:
+          type: number
+          example: '123.45'
+
+    
