@@ -12,7 +12,7 @@ const {
 } = process.env;
 
 beforeAll(async () => {
-  await mongoose.connect(`mongodb://root:secret@127.0.0.1:27019/${process.env.DB_DATABASE}?authSource=admin`);
+  await mongoose.connect(`mongodb://root:secret@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}?authSource=admin`);
 });
 
 afterAll(async () => {

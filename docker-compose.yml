@@ -27,6 +27,8 @@ services:
       - DB_HOST=mongodb-customer
       - DB_PORT=27017
       - DB_DATABASE=fraudshield-customers
+      - TEST_USER=Lucas Marcos Nogueira
+      - TEST_PASSWORD=123456
     depends_on:
       - mongodb-customer
 
