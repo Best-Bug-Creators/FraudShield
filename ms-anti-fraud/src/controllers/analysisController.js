@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Analysis from '../models/Analysis.js';
 
 class analysisController {
@@ -17,7 +18,24 @@ class analysisController {
       if (!analysis) {
         res.status(404).send({ message: 'Analysis not found' });
       } else {
-        res.status(200).json(analysis);
+        const customer = await axios.get(`localhost:3002/customers/invoiceExp/${analysis.clientId}`);
+        const { value } = await axios.get(`localhost:3003/transactions/${analysis.transactionId}`);
+        const detailedAnalysis = {
+          // eslint-disable-next-line no-underscore-dangle
+          analysisId: analysis._id,
+          analysisStatus: analysis.status,
+          clientId: analysis.clientId,
+          clientData: {
+            name: customer.name,
+            phone: customer.phone,
+            address: customer.address,
+            monthlyIncome: customer.monthlyIncome,
+            invoiceExpirationDate: customer.invoiceExpirationDate,
+          },
+          transactionId: analysis.transactionId,
+          transactionAmount: value,
+        };
+        res.status(200).json(detailedAnalysis);
       }
     } catch (err) {
       res.status(500).send({ message: err.message });
@@ -51,7 +69,7 @@ class analysisController {
       const updatedAnalysis = await Analysis.findByIdAndUpdate(
         id,
         { $set: { status } },
-        { new: true }
+        { new: true },
       );
       if (!updatedAnalysis) {
         res.status(404).send({ message: 'Analysis not found' });

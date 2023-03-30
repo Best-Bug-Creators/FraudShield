@@ -1,0 +1,10 @@
+use('fraudshield-anti-fraud');
+db.analysis.insertMany([
+  {
+    clientId: '64245bc57b29eb93337dad0e',
+    transactionId: '64245bd6361506a9249331e6',
+  },
+]);
+
+use('fraudshield-anti-fraud');
+db.analysis.find();

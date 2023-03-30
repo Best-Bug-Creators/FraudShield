@@ -37,6 +37,11 @@ services:
       - 3001:3001
     volumes:
       - ./ms-anti-fraud/:/app/ms-anti-fraud
+    environment:
+      - PORT=3001
+      - DB_HOST=mongodb-anti-fraud
+      - DB_PORT=27017
+      - DB_DATABASE=fraudshield-anti-fraud
     depends_on:
       - mongodb-anti-fraud
 
