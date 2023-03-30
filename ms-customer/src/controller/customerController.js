@@ -22,7 +22,6 @@ class CustomerController {
 
   static validateCreditCard = async (req, res) => {
     const cardData = req.body;
-
     try {
       const customerId = await Customer.findOne({ cardData }, { _id: 1 });
 

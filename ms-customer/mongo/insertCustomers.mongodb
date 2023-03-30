@@ -1,7 +1,5 @@
 use('fraudshield-customers')
 
-db.createCollection('customers')
-
 db.customers.insertMany([
   {
     personalData: {

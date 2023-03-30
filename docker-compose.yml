@@ -42,6 +42,8 @@ services:
       - DB_HOST=mongodb-anti-fraud
       - DB_PORT=27017
       - DB_DATABASE=fraudshield-anti-fraud
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=secret
     depends_on:
       - mongodb-anti-fraud
 
