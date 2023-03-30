@@ -3,19 +3,21 @@ import {
 } from '@jest/globals';
 import request from 'supertest';
 import mongoose from 'mongoose';
+import {} from 'dotenv/config';
 import app from '../../src/app.js';
 
 beforeAll(async () => {
-  await mongoose.connect('mongodb://root:secret@127.0.0.1:27019/fraudshield-customers?authSource=admin');
+  await mongoose.connect(`mongodb://root:secret@127.0.0.1:27019/${process.env.DB_DATABASE}?authSource=admin`);
 });
 
 afterAll(async () => {
   await mongoose.connection.close();
 });
 
+let responseId;
 describe('GET on /customers/validateCard', () => {
   it('Must return the card owner id', async () => {
-    await request(app)
+    const response = await request(app)
       .get('/customers/validateCard')
       .set('Accept', 'application/json')
       .send({
@@ -28,9 +30,10 @@ describe('GET on /customers/validateCard', () => {
       .expect(200);
 
     // eslint-disable-next-line no-underscore-dangle
+    responseId = response.body._id;
   });
 
-  it('Must return error with invalid card', async () => {
+  it('Must return error with an invalid card', async () => {
     await request(app)
       .get('/customers/validateCard')
       .set('Accept', 'application/json')
@@ -47,5 +50,15 @@ describe('GET on /customers/validateCard', () => {
 
 describe('GET on /customers/id', () => {
   it('Must return the client data', async () => {
+    await request(app)
+      .get(`/customers/${responseId}`)
+      .expect('content-type', /json/)
+      .expect(200);
+  });
+
+  it('Must return error with an invalid id', async () => {
+    await request(app)
+      .get('/customers/123456789012345678901234')
+      .expect(404);
   });
 });
