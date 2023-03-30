@@ -1,4 +1,5 @@
 import axios from 'axios';
+import mongoose from 'mongoose';
 import Analysis from '../models/Analysis.js';
 
 class analysisController {
@@ -18,8 +19,8 @@ class analysisController {
       if (!analysis) {
         res.status(404).send({ message: 'Analysis not found' });
       } else {
-        const customer = await axios.get(`localhost:3002/customers/invoiceExp/${analysis.clientId}`);
-        const { value } = await axios.get(`localhost:3003/transactions/${analysis.transactionId}`);
+        const customer = await axios.get(`http://localhost:3002/customers/invoiceExp/${analysis.clientId}`);
+        const { value } = await axios.get(`http://localhost:3003/transactions/${analysis.transactionId}`);
         const detailedAnalysis = {
           // eslint-disable-next-line no-underscore-dangle
           analysisId: analysis._id,
@@ -71,7 +72,10 @@ class analysisController {
         { $set: { status } },
         { new: true },
       );
-      if (!updatedAnalysis) {
+      await axios.patch(`localhost:3003/transactions/${updatedAnalysis.transactionId}`, { status });
+
+      if (!updatedAnalysis || !mongoose.isValidObjectId(id)) {
+        console.log('cheguei');
         res.status(404).send({ message: 'Analysis not found' });
       } else {
         res.status(200).json(updatedAnalysis);
@@ -91,7 +95,7 @@ class analysisController {
         res.status(204).send({ message: 'Analysis deleted successfully.' });
       }
     } catch (err) {
-      res.status(500).send({ message: err.message });
+      res.status(400).send({ message: err.message });
     }
   };
 }

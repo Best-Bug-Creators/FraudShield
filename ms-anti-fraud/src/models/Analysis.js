@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 const analysisSchema = new mongoose.Schema(
   {
-    clientId: { type: mongoose.Schema.Types.ObjectId },
-    transactionId: { type: mongoose.Schema.Types.ObjectId },
+    clientId: { type: mongoose.Schema.Types.ObjectId, required: true },
+    transactionId: { type: mongoose.Schema.Types.ObjectId, required: true },
     status: { type: String, required: true },
   },
   {
