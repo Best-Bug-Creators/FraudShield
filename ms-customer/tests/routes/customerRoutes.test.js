@@ -31,7 +31,7 @@ describe('POST on /customers/login', () => {
       })
       .expect(204);
 
-    token = `Bearer ${response.headers.authorization}`;
+    token = response.headers.authorization;
   });
 
   it('Must return error with wrong credentials', async () => {
