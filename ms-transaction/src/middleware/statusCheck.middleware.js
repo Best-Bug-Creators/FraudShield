@@ -1,10 +1,11 @@
-import customError from "../helpers/CustomError.js";
-import HTTPStatus from "../helpers/HTTP.status.js";
-import Transaction from "../models/Transaction.js"
+import customError from '../helpers/CustomError.js';
+import HTTPStatus from '../helpers/HTTP.status.js';
+import Transaction from '../models/Transaction.js';
 
 const statusCheck = async (req, res, next) => {
   const { id } = req.params;
-  const transaction = await Transaction.findById(id)
+  const transaction = await Transaction.findById(id);
+
   if (!transaction) {
     throw customError('Transaction does not exist', HTTPStatus.NOT_FOUND);
   }
@@ -13,6 +14,6 @@ const statusCheck = async (req, res, next) => {
   }
 
   next();
-}
+};
 
 export default statusCheck;
