@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "bc259e7c-b095-45b3-84ad-ae1d20cf8a5f",
+		"name": "Transaction - Direct Approved",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Lucas Marcos Nogueira\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/customers/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"customers",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTransaction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjU5NjEyOTc2NDZmNWFhYWQ1NjM1NiIsInN1YiI6IjY0MjQ5Y2M5YWMzODM1NTZlZDQzZWRlOSIsImlhdCI6MTY4MDIwMDQwOCwiZXhwIjoxNjgwMjAxMzA4fQ.izyPOC32VPJmTb6pthcRnEuxKV9adVNebE1NtTpNQD8",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"value\": 1000,\r\n    \"name\": \"Lucas Nogueira\",\r\n    \"number\": \"5528818147125386\",\r\n    \"expirationDate\": \"2024-09\",\r\n    \"cvv\": \"443\",\r\n    \"invoiceExpirationDate\": \"25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3003/transactions",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

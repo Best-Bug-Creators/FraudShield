@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "ecb46890-e21b-46e1-9b34-24cd34471701",
+		"name": "Transaction - Approved by AntiFraud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Lucas Marcos Nogueira\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/customers/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"customers",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTransaction",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjU5NjEyOTc2NDZmNWFhYWQ1NjM1NiIsInN1YiI6IjY0MjQ5Y2M5YWMzODM1NTZlZDQzZWRlOSIsImlhdCI6MTY4MDIwMTYzOCwiZXhwIjoxNjgwMjAyNTM4fQ.CDR8W5GlfBU75D5REVB5gHvp3wrnaN_707wlilhBqZI",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"value\": 4000,\r\n    \"name\": \"Lucas Nogueira\",\r\n    \"number\": \"5528818147125386\",\r\n    \"expirationDate\": \"2024-09\",\r\n    \"cvv\": \"443\",\r\n    \"invoiceExpirationDate\": \"25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3003/transactions",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAnalysis",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/analyses/under-review",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"analyses",
+						"under-review"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ApproveTransaction",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"Approved\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/analyses/6425d419e262afb64aecd87d",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"analyses",
+						"6425d419e262afb64aecd87d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTransactionApproved",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3003/transactions/6425d419970aaf611b61d08c",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"transactions",
+						"6425d419970aaf611b61d08c"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "8f9129c5-97a3-455b-9dd6-fdcabb5e6cbb",
+		"name": "Transaction - Reject by AntiFraud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Lucas Marcos Nogueira\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3002/customers/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"customers",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTransaction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjU5NjEyOTc2NDZmNWFhYWQ1NjM1NiIsInN1YiI6IjY0MjQ5Y2M5YWMzODM1NTZlZDQzZWRlOSIsImlhdCI6MTY4MDIwMDg2MSwiZXhwIjoxNjgwMjAxNzYxfQ.Udj4LJ1LN4I5NuASHDkGYDLYDTsRbh89FY8x56KsxTI",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"value\": 4000,\r\n    \"name\": \"Lucas Nogueira\",\r\n    \"number\": \"5528818147125386\",\r\n    \"expirationDate\": \"2024-09\",\r\n    \"cvv\": \"443\",\r\n    \"invoiceExpirationDate\": \"25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3003/transactions",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAnalysis",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/analyses/under-review",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"analyses",
+						"under-review"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReproveTransaction",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"Rejected\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/analyses/6425d4d3e262afb64aecd882",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"analyses",
+						"6425d4d3e262afb64aecd882"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTransactionRejected",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3003/transactions/6425d4d3970aaf611b61d093",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"transactions",
+						"6425d4d3970aaf611b61d093"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
