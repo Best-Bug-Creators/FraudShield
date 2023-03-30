@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import {
   afterAll, beforeAll, describe, it,
 } from '@jest/globals';
