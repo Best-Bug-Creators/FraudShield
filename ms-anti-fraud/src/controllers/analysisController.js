@@ -71,6 +71,9 @@ class analysisController {
         { $set: { status } },
         { new: true },
       );
+
+      await axios.patch(`localhost:3003/transactions/${updatedAnalysis.transactionId}`, { status });
+
       if (!updatedAnalysis) {
         res.status(404).send({ message: 'Analysis not found' });
       } else {
